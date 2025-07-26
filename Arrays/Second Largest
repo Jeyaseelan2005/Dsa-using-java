@@ -1,0 +1,61 @@
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        
+        // Brute force - sorting 
+        int n = arr.length;
+        
+        Arrays.sort(arr);
+        int largest = arr[n-1];
+        int secondL = -1;
+        
+        for(int i=n-1;i>=0;i--) {
+            if(arr[i]!=largest) {
+                secondL = arr[i];
+                break;
+            }
+        }
+        return secondL;
+
+        
+        //better solution
+        
+        int largest = arr[0];
+        
+        int secondLargest = -1;
+        
+        for (int i = 1; i < arr.length; i++) {
+          largest = Math.max(largest, arr[i]); // Using inbuilt Math.max
+        }
+        
+
+        
+        for(int j=0;j<arr.length;j++) {
+            if(arr[j]>secondLargest && arr[j]<largest) {
+                secondLargest = arr[j];
+            }
+        }
+        return secondLargest;
+        
+        
+        
+        //optimal solution tc : O(n)
+        
+        int largest = arr[0];
+        int secondLargest = -1;
+        
+        for(int i=1;i<arr.length;i++) {
+            if(arr[i]<largest) {
+                secondLargest = largest;
+                largest = arr[i];
+            } else if(arr[i]>secondLargest && arr[i]!=largest) {
+                secondLargest = arr[i];
+            }
+        }
+        return secondLargest;
+        
+    }
+}
+
+
+
+
